@@ -1,0 +1,220 @@
+/* ==========================================================================
+   GitExplorer - Responsive Design & Media Queries
+   File: assets/styles/responsive.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tablet & Medium Devices (<= 1024px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1024px) {
+  .repo-controls-toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .control-input-wrapper {
+    grid-column: span 2;
+  }
+
+  .repos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .favorites-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Devices (<= 768px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  /* Header Adjustments */
+  .header-container {
+    padding: 0 var(--space-4);
+  }
+
+  .header-nav {
+    display: none; /* Keep header clean on mobile; logo & theme toggle take priority */
+  }
+
+  /* Hero Section Adjustments */
+  .hero-section {
+    padding: var(--space-6) var(--space-4) var(--space-10);
+  }
+
+  .hero-title {
+    font-size: var(--text-3xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Search Bar Reflow */
+  .search-input-group {
+    flex-direction: column;
+    padding: var(--space-2);
+    gap: var(--space-2);
+  }
+
+  .search-icon {
+    display: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: var(--space-3);
+    text-align: center;
+  }
+
+  .search-btn {
+    width: 100%;
+    padding: var(--space-3);
+  }
+
+  .search-kbd {
+    display: none;
+  }
+
+  .hero-features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    max-width: 440px;
+    width: 100%;
+  }
+
+  .hero-feature-card {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  /* Main Container & Spacing */
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  .main-content {
+    padding: var(--space-8) 0 var(--space-12);
+  }
+
+  /* Profile Card Reflow */
+  .profile-card {
+    padding: var(--space-5);
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .profile-title-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-actions {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--space-2);
+  }
+
+  .profile-details-list {
+    justify-content: center;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .stat-box {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  /* Repo Controls Reflow */
+  .repo-controls-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .control-input-wrapper {
+    grid-column: span 1;
+  }
+
+  .repos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Skeleton Loading Responsive */
+  .skeleton-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skeleton-meta {
+    width: 100%;
+    align-items: center;
+  }
+
+  /* Footer Reflow */
+  .footer-top {
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .footer-nav-group {
+    gap: var(--space-8);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Small Mobile Devices (<= 480px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .brand-text {
+    font-size: var(--text-lg);
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .profile-actions .btn {
+    width: 100%;
+  }
+
+  .repo-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .btn-view-repo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .quick-search-tags {
+    flex-direction: column;
+  }
+}
+

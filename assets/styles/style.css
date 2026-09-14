@@ -1,0 +1,11 @@
+/* ==========================================================================
+   GitExplorer - Master Stylesheet
+   Imports modular stylesheets in cascading order.
+   File: assets/styles/style.css
+   ========================================================================== */
+
+@import "base.css";
+@import "layout.css";
+@import "components.css";
+@import "responsive.css";
+
