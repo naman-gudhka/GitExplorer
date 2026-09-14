@@ -97,14 +97,14 @@
               type="search" 
               id="usernameInput" 
               name="username" 
-              class="search-input" 
+              class="search-input js-search-input" 
               placeholder="Enter a GitHub username (e.g., gaearon, torvalds)..." 
               autocomplete="off"
               spellcheck="false"
               required
             >
             <kbd class="search-kbd" aria-hidden="true">/</kbd>
-            <button type="button" class="btn btn-primary search-btn" id="searchSubmitBtn">
+            <button type="submit" class="btn btn-primary search-btn js-search-btn" id="searchSubmitBtn">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -174,173 +174,21 @@
   <main class="main-content" id="dashboard" role="main">
     <div class="container">
 
-      <!-- VISUAL STATES DEMONSTRATION SECTION
-           Provides visual placeholders for Loading, Error, and Empty states
-           ready for JavaScript integration. -->
-      <div class="states-container" aria-label="Application Feedback States">
-        
-        <!-- Collapsible Details element keeps states accessible without cluttering -->
-        <details class="states-details">
-          <summary class="states-summary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            <span>UI States &amp; Feedback Previews (Loading Shimmer, Error, Empty State)</span>
-          </summary>
-
-          <div class="states-content-wrapper">
-            
-            <!-- 1. Loading Skeleton State Placeholder -->
-            <div>
-              <p class="states-container-title">State 1: Loading Skeleton (Shimmer)</p>
-              <div class="skeleton-box" aria-hidden="true">
-                <div class="skeleton-header">
-                  <div class="skeleton-avatar skeleton-shimmer"></div>
-                  <div class="skeleton-meta">
-                    <div class="skeleton-line title skeleton-shimmer"></div>
-                    <div class="skeleton-line w-50 skeleton-shimmer"></div>
-                    <div class="skeleton-line w-70 skeleton-shimmer"></div>
-                  </div>
-                </div>
-                <div class="skeleton-line w-90 skeleton-shimmer"></div>
-                <div class="skeleton-line w-30 skeleton-shimmer"></div>
-              </div>
-            </div>
-
-            <!-- 2. Error State Banner Placeholder -->
-            <div>
-              <p class="states-container-title">State 2: Error Notification</p>
-              <div class="state-banner-error" role="alert">
-                <svg class="state-error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-                <div class="state-error-content">
-                  <h4 class="state-error-title">User Not Found</h4>
-                  <p class="state-error-text">No GitHub user matching the query could be retrieved. Please check the username spelling or try another query.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3. Empty State Card Placeholder -->
-            <div>
-              <p class="states-container-title">State 3: Empty Results Placeholder</p>
-              <div class="state-card-empty">
-                <svg class="state-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                <h4 class="state-empty-title">No Developer Profile Loaded</h4>
-                <p class="state-empty-text">Enter a GitHub handle in the search bar above to fetch developer details, stats, and repository showcases.</p>
-              </div>
-            </div>
-
-          </div>
-        </details>
-
-      </div>
-
       <!-- MAIN DASHBOARD FLOW -->
       <div class="dashboard-flow">
 
         <!-- USER PROFILE CARD -->
-        <section class="profile-card" id="profile" aria-labelledby="profile-name-heading">
-            
-            <div class="profile-header">
-              <!-- Avatar -->
-              <div class="profile-avatar-container">
-                <img 
-                  class="profile-avatar" 
-                  src="https://avatars.githubusercontent.com/u/810438?v=4" 
-                  alt="Dan Abramov GitHub avatar" 
-                  width="104" 
-                  height="104"
-                >
-              </div>
-
-              <!-- Main Meta & Identity -->
-              <div class="profile-main-meta">
-                <div class="profile-title-row">
-                  <div class="profile-name-group">
-                    <h2 class="profile-name" id="profile-name-heading">Dan Abramov</h2>
-                    <span class="profile-username">@gaearon</span>
-                  </div>
-
-                  <!-- Profile Actions -->
-                  <div class="profile-actions">
-                    <!-- Add to Favorites button placeholder -->
-                    <button type="button" class="btn btn-favorite" id="addFavoriteBtn" aria-label="Add developer to favorites">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      <span>Favorited</span>
-                    </button>
-
-                    <!-- View on GitHub link placeholder -->
-                    <a href="#" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="View Dan Abramov profile on GitHub">
-                      <span>GitHub</span>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Bio -->
-                <p class="profile-bio">
-                  Working on React and Bluesky. Co-author of Redux and Create React App. Writing about software design and JavaScript at Overreacted.
-                </p>
-
-                <!-- Profile Attributes List -->
-                <ul class="profile-details-list">
-                  <li class="profile-detail-item">
-                    <svg class="profile-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <span>London, United Kingdom</span>
-                  </li>
-
-                  <li class="profile-detail-item">
-                    <svg class="profile-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
-                    <a href="#" target="_blank" rel="noopener noreferrer">https://overreacted.io</a>
-                  </li>
-
-                  <li class="profile-detail-item">
-                    <svg class="profile-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                    </svg>
-                    <span>Bluesky</span>
-                  </li>
-                </ul>
-              </div>
+        <section class="js-profile-card" id="profile" aria-labelledby="profile-name-heading">
+          <div>
+            <div class="state-card-empty">
+              <svg class="state-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7  0 0114 0z"></path>
+              </svg>
+              <h4 class="state-empty-title">No Developer Profile Loaded</h4>
+              <p class="state-empty-text">Enter a GitHub handle in the search bar above to fetch developer details, stats, and repository showcases.</p>
             </div>
-
-            <!-- Stats Bar -->
-            <div class="profile-stats-grid">
-              <div class="stat-box">
-                <span class="stat-value">82.4k</span>
-                <span class="stat-label">Followers</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-value">1,720</span>
-                <span class="stat-label">Following</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-value">256</span>
-                <span class="stat-label">Public Repos</span>
-              </div>
-            </div>
-
-          </section>
+          </div>
+        </section>
 
 
           <!-- REPOSITORY CONTROLS & LIST SECTION -->
@@ -407,284 +255,14 @@
             </div>
 
             <!-- REPOSITORY CARDS GRID -->
-            <div class="repos-grid">
-
-              <!-- Repo Card 1: Redux -->
-              <article class="repo-card">
-                <div class="repo-card-top">
-                  <div class="repo-card-header">
-                    <div class="repo-title-wrapper">
-                      <svg class="repo-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                      <a href="#" class="repo-name-link">redux</a>
-                    </div>
-                    <span class="badge">Public</span>
-                  </div>
-                  <p class="repo-description">
-                    Predictable state container for JavaScript applications with predictable state mutations and middleware support.
-                  </p>
-                </div>
-
-                <div class="repo-card-footer">
-                  <div class="repo-meta-group">
-                    <span class="repo-lang-badge">
-                      <span class="lang-dot ts" aria-hidden="true"></span>
-                      <span>TypeScript</span>
-                    </span>
-                    <span class="repo-stat-item" title="60,340 Stars">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      60.3k
-                    </span>
-                    <span class="repo-stat-item" title="15,400 Forks">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="18" r="3"></circle>
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="18" cy="6" r="3"></circle>
-                        <path d="M18 9v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
-                        <path d="M12 12v3"></path>
-                      </svg>
-                      15.4k
-                    </span>
-                    <span class="repo-updated">Updated 2 days ago</span>
-                  </div>
-                  <a href="#" class="btn btn-view-repo">View Repo &rarr;</a>
-                </div>
-              </article>
-
-              <!-- Repo Card 2: Overreacted -->
-              <article class="repo-card">
-                <div class="repo-card-top">
-                  <div class="repo-card-header">
-                    <div class="repo-title-wrapper">
-                      <svg class="repo-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                      <a href="#" class="repo-name-link">overreacted.io</a>
-                    </div>
-                    <span class="badge">Public</span>
-                  </div>
-                  <p class="repo-description">
-                    Personal technical blog created with Astro and React. Deep dives into mental models, UI architecture, and hooks.
-                  </p>
-                </div>
-
-                <div class="repo-card-footer">
-                  <div class="repo-meta-group">
-                    <span class="repo-lang-badge">
-                      <span class="lang-dot js" aria-hidden="true"></span>
-                      <span>JavaScript</span>
-                    </span>
-                    <span class="repo-stat-item" title="6,820 Stars">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      6.8k
-                    </span>
-                    <span class="repo-stat-item" title="1,120 Forks">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="18" r="3"></circle>
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="18" cy="6" r="3"></circle>
-                        <path d="M18 9v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
-                        <path d="M12 12v3"></path>
-                      </svg>
-                      1.1k
-                    </span>
-                    <span class="repo-updated">Updated yesterday</span>
-                  </div>
-                  <a href="#" class="btn btn-view-repo">View Repo &rarr;</a>
-                </div>
-              </article>
-
-              <!-- Repo Card 3: React-DND -->
-              <article class="repo-card">
-                <div class="repo-card-top">
-                  <div class="repo-card-header">
-                    <div class="repo-title-wrapper">
-                      <svg class="repo-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                      <a href="#" class="repo-name-link">react-dnd</a>
-                    </div>
-                    <span class="badge">Public</span>
-                  </div>
-                  <p class="repo-description">
-                    Drag and Drop for React. Flexible abstractions that decouple complex drag sources and drop targets.
-                  </p>
-                </div>
-
-                <div class="repo-card-footer">
-                  <div class="repo-meta-group">
-                    <span class="repo-lang-badge">
-                      <span class="lang-dot ts" aria-hidden="true"></span>
-                      <span>TypeScript</span>
-                    </span>
-                    <span class="repo-stat-item" title="20,100 Stars">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      20.1k
-                    </span>
-                    <span class="repo-stat-item" title="2,050 Forks">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="18" r="3"></circle>
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="18" cy="6" r="3"></circle>
-                        <path d="M18 9v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
-                        <path d="M12 12v3"></path>
-                      </svg>
-                      2.0k
-                    </span>
-                    <span class="repo-updated">Updated 1 week ago</span>
-                  </div>
-                  <a href="#" class="btn btn-view-repo">View Repo &rarr;</a>
-                </div>
-              </article>
-
-              <!-- Repo Card 4: Normalizr -->
-              <article class="repo-card">
-                <div class="repo-card-top">
-                  <div class="repo-card-header">
-                    <div class="repo-title-wrapper">
-                      <svg class="repo-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                      <a href="#" class="repo-name-link">normalizr</a>
-                    </div>
-                    <span class="badge">Public</span>
-                  </div>
-                  <p class="repo-description">
-                    Normalizes nested JSON according to a schema for predictable client state management and query caching.
-                  </p>
-                </div>
-
-                <div class="repo-card-footer">
-                  <div class="repo-meta-group">
-                    <span class="repo-lang-badge">
-                      <span class="lang-dot js" aria-hidden="true"></span>
-                      <span>JavaScript</span>
-                    </span>
-                    <span class="repo-stat-item" title="21,400 Stars">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      21.4k
-                    </span>
-                    <span class="repo-stat-item" title="940 Forks">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="18" r="3"></circle>
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="18" cy="6" r="3"></circle>
-                        <path d="M18 9v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
-                        <path d="M12 12v3"></path>
-                      </svg>
-                      940
-                    </span>
-                    <span class="repo-updated">Updated 3 weeks ago</span>
-                  </div>
-                  <a href="#" class="btn btn-view-repo">View Repo &rarr;</a>
-                </div>
-              </article>
-
-              <!-- Repo Card 5: React-Hot-Loader -->
-              <article class="repo-card">
-                <div class="repo-card-top">
-                  <div class="repo-card-header">
-                    <div class="repo-title-wrapper">
-                      <svg class="repo-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                      <a href="#" class="repo-name-link">react-hot-loader</a>
-                    </div>
-                    <span class="badge">Public</span>
-                  </div>
-                  <p class="repo-description">
-                    Tweak React components in real time without losing component state. Predecessor to React Fast Refresh.
-                  </p>
-                </div>
-
-                <div class="repo-card-footer">
-                  <div class="repo-meta-group">
-                    <span class="repo-lang-badge">
-                      <span class="lang-dot js" aria-hidden="true"></span>
-                      <span>JavaScript</span>
-                    </span>
-                    <span class="repo-stat-item" title="12,700 Stars">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      12.7k
-                    </span>
-                    <span class="repo-stat-item" title="1,150 Forks">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="18" r="3"></circle>
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="18" cy="6" r="3"></circle>
-                        <path d="M18 9v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
-                        <path d="M12 12v3"></path>
-                      </svg>
-                      1.1k
-                    </span>
-                    <span class="repo-updated">Updated 1 month ago</span>
-                  </div>
-                  <a href="#" class="btn btn-view-repo">View Repo &rarr;</a>
-                </div>
-              </article>
-
-              <!-- Repo Card 6: Deep-Diff -->
-              <article class="repo-card">
-                <div class="repo-card-top">
-                  <div class="repo-card-header">
-                    <div class="repo-title-wrapper">
-                      <svg class="repo-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                      <a href="#" class="repo-name-link">deep-diff-analyzer</a>
-                    </div>
-                    <span class="badge">Public</span>
-                  </div>
-                  <p class="repo-description">
-                    High-performance recursive difference generator and patch application tool for deep structured trees.
-                  </p>
-                </div>
-
-                <div class="repo-card-footer">
-                  <div class="repo-meta-group">
-                    <span class="repo-lang-badge">
-                      <span class="lang-dot rust" aria-hidden="true"></span>
-                      <span>Rust</span>
-                    </span>
-                    <span class="repo-stat-item" title="4,180 Stars">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                      </svg>
-                      4.2k
-                    </span>
-                    <span class="repo-stat-item" title="310 Forks">
-                      <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="18" r="3"></circle>
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="18" cy="6" r="3"></circle>
-                        <path d="M18 9v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
-                        <path d="M12 12v3"></path>
-                      </svg>
-                      310
-                    </span>
-                    <span class="repo-updated">Updated 2 months ago</span>
-                  </div>
-                  <a href="#" class="btn btn-view-repo">View Repo &rarr;</a>
-                </div>
-              </article>
-
+            <div class="repos-grid js-repo-grid">
+              <div class="state-card-empty">
+                <svg class="state-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <h4 class="state-empty-title">No Developer Selected</h4>
+                <p class="state-empty-text">Search for a GitHub developer above to explore their public repositories.</p>
+              </div>
             </div>
           </section>
 

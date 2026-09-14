@@ -481,6 +481,11 @@
   gap: var(--space-2);
 }
 
+/* For hiding the states */
+.is-hidden{
+  display: none;
+}
+
 /* Skeleton Loading State */
 .skeleton-box {
   background-color: var(--bg-surface);
@@ -589,6 +594,8 @@
   border: 1px dashed var(--border-color);
   border-radius: var(--radius-lg);
   color: var(--text-muted);
+
+  grid-column: 1 / -1;
 }
 
 .state-empty-icon {
@@ -1198,4 +1205,50 @@
 .footer-attribution {
   font-size: var(--text-xs);
   color: var(--text-muted);
+}
+
+.pagination {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-10);
+  margin-top: var(--space-6);
+}
+
+.pagination button {
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--accent-color);
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination .js-prev-page {
+  justify-self: start;
+}
+
+.pagination .js-page-number {
+  justify-self: center;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  min-width: 70px;
+  text-align: center;
+}
+
+.pagination .js-next-page {
+  justify-self: end;
 }
