@@ -400,7 +400,7 @@
   font-size: var(--text-xs);
   text-decoration: none;
   transition: color var(--transition-fast);
-  padding: var(--space-2);
+  padding: var(--space-1);
 }
 
 .scroll-cue-link:hover {
@@ -908,10 +908,6 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-}
-
-.repo-count-badge {
-  font-size: var(--text-xs);
 }
 
 .repo-controls-toolbar {

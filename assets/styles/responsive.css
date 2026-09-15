@@ -39,7 +39,7 @@
 
   /* Hero Section Adjustments */
   .hero-section {
-    padding: var(--space-6) var(--space-4) var(--space-10);
+    padding: var(--space-6) var(--space-4) 5rem;
   }
 
   .hero-title {
