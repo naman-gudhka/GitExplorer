@@ -1,4 +1,8 @@
-import { formatNumber, formatRelativeDate } from "./utils.js";
+import { favorites } from "../../data/favorites.js";
+import { formatNumber, formatRelativeDate, saveToStorage } from "./utils.js";
+
+const favoritesGridSection = document.querySelector(".js-favorites-grid");
+const favoriteCount = document.querySelector(".js-favorites-count");
 
 export function renderRepositories(result, repoGridSection){
 
@@ -69,5 +73,64 @@ export function renderRepositories(result, repoGridSection){
   }
 
   repoGridSection.innerHTML = repoHTML + paginationHTML;
+
+}
+
+export function renderFavorites(){
+
+  if(favorites.length === 0){
+    favoritesGridSection.innerHTML = `
+      <div class="state-card-empty">
+        <div class="state-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+
+        <h3 class="state-card-title">No Favorites Yet</h3>
+
+        <p class="state-card-text">
+          Add GitHub developers to your favorites to see them here.
+        </p>
+      </div>
+    `;
+  }else{
+    const favoritesGridHTML = favorites.map((favorite) => {
+    return `
+      <div class="favorite-item is-active">
+        <a href="#profile" class="favorite-profile-link" aria-label="View ${favorite.name} profile (currently active)">
+          <img class="favorite-avatar" src="${favorite.avatar_url}" alt="${favorite.name} avatar" loading="lazy" width="38" height="38">
+          <div class="favorite-info">
+            <span class="favorite-name">${favorite.name}</span>
+            <span class="favorite-handle">${favorite.login}</span>
+          </div>
+        </a>
+        <button type="button" class="btn-icon btn-icon-danger favorite-remove-btn" title="Remove from favorites" aria-label="Remove ${favorite.name} from favorites" data-login="${favorite.login}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+    `;
+    }).join("");
+
+    favoritesGridSection.innerHTML = favoritesGridHTML;
+
+    const deleteButtons = document.querySelectorAll(".favorite-remove-btn");
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const deleteButton = button.dataset.login;
+        const index = favorites.findIndex((favorite) => favorite.login === deleteButton);
+        favorites.splice(index, 1);
+        saveToStorage("favorites", favorites);
+        renderFavorites();
+      });
+    });
+
+  }
+
+  favoriteCount.textContent = `${favorites.length} Saved Developers`;
 
 }

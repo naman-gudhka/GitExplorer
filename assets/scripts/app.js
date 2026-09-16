@@ -1,6 +1,7 @@
 import { getRepositories, getUser } from "./github-api.js";
-import { renderRepositories } from "./render.js";
-import { formatNumber } from "./utils.js";
+import { renderRepositories, renderFavorites } from "./render.js";
+import { formatNumber, saveToStorage } from "./utils.js";
+import { favorites } from "../../data/favorites.js";
 
 const form = document.querySelector("form");
 const searchBar = document.querySelector(".js-search-input");
@@ -201,11 +202,11 @@ form.addEventListener('submit', async (e) => {
             <!-- Profile Actions -->
             <div class="profile-actions">
               <!-- Add to Favorites button placeholder -->
-              <button type="button" class="btn btn-favorite" id="addFavoriteBtn" aria-label="Add developer to favorites">
+              <button type="button" class="btn btn-favorite js-favorite-btn" id="addFavoriteBtn" aria-label="Add developer to favorites">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
-                <span>Favorited</span>
+                <span>${favorites.some((developer) => developer.login === user.login) ? "Favorited" : "Add to Favorites"}</span>
               </button>
 
               <!-- View on GitHub link placeholder -->
@@ -247,6 +248,37 @@ form.addEventListener('submit', async (e) => {
       </div> 
     `;
 
+    const favoriteButton = document.querySelector(".js-favorite-btn");
+
+    favoriteButton.addEventListener('click', () => {
+      if(!favorites.some((favorite) => favorite.login === user.login)){
+        favorites.push({
+          login: user.login,
+          name: user.name,
+          avatar_url: user.avatar_url
+        });
+        favoriteButton.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Favorited</span>
+        `;
+        saveToStorage("favorites", favorites);
+        renderFavorites();
+      }else{
+        const index = favorites.findIndex((favorite) => favorite.login === user.login);
+        favorites.splice(index, 1);
+        favoriteButton.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Add to favorites</span>
+        `;
+        saveToStorage("favorites", favorites);
+        renderFavorites();
+      }
+    });
+ 
     if(result.repositories.length === 0){
       repoGridSection.innerHTML = `
         <div class="state-card-empty">

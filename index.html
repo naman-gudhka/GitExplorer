@@ -275,62 +275,10 @@
                 </svg>
                 <span>Favorites</span>
               </h3>
-              <span class="badge badge-primary" aria-label="3 favorited developers">3 Saved Developers</span>
+              <span class="badge badge-primary js-favorites-count" aria-label="3 favorited developers"></span>
             </div>
 
-            <div class="favorites-grid">
-              
-              <!-- Favorite Item 1 (Active/Selected) -->
-              <div class="favorite-item is-active">
-                <a href="#profile" class="favorite-profile-link" aria-label="View Dan Abramov profile (currently active)">
-                  <img class="favorite-avatar" src="https://avatars.githubusercontent.com/u/810438?v=4" alt="Dan Abramov avatar" loading="lazy" width="38" height="38">
-                  <div class="favorite-info">
-                    <span class="favorite-name">Dan Abramov</span>
-                    <span class="favorite-handle">@gaearon</span>
-                  </div>
-                </a>
-                <button type="button" class="btn-icon btn-icon-danger favorite-remove-btn" title="Remove from favorites" aria-label="Remove Dan Abramov from favorites">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  </svg>
-                </button>
-              </div>
-
-              <!-- Favorite Item 2 -->
-              <div class="favorite-item">
-                <a href="#profile" class="favorite-profile-link" aria-label="View Linus Torvalds profile">
-                  <img class="favorite-avatar" src="https://avatars.githubusercontent.com/u/1024025?v=4" alt="Linus Torvalds avatar" loading="lazy" width="38" height="38">
-                  <div class="favorite-info">
-                    <span class="favorite-name">Linus Torvalds</span>
-                    <span class="favorite-handle">@torvalds</span>
-                  </div>
-                </a>
-                <button type="button" class="btn-icon btn-icon-danger favorite-remove-btn" title="Remove from favorites" aria-label="Remove Linus Torvalds from favorites">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  </svg>
-                </button>
-              </div>
-
-              <!-- Favorite Item 3 -->
-              <div class="favorite-item">
-                <a href="#profile" class="favorite-profile-link" aria-label="View Sindre Sorhus profile">
-                  <img class="favorite-avatar" src="https://avatars.githubusercontent.com/u/170270?v=4" alt="Sindre Sorhus avatar" loading="lazy" width="38" height="38">
-                  <div class="favorite-info">
-                    <span class="favorite-name">Sindre Sorhus</span>
-                    <span class="favorite-handle">@sindresorhus</span>
-                  </div>
-                </a>
-                <button type="button" class="btn-icon btn-icon-danger favorite-remove-btn" title="Remove from favorites" aria-label="Remove Sindre Sorhus from favorites">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  </svg>
-                </button>
-              </div>
-
+            <div class="favorites-grid js-favorites-grid">
             </div>
           </div>
         </section>
