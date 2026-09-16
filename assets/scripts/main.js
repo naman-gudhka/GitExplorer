@@ -1,5 +1,4 @@
 import { loadFromStorage, saveToStorage } from "./utils.js";
-import { favorites } from "../../data/favorites.js";
 import { renderFavorites } from "./render.js";
 
 renderFavorites();

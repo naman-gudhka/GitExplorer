@@ -3,7 +3,15 @@ const BASE_URL = "https://api.github.com";
 export async function getUser(username){
   const response = await fetch(`${BASE_URL}/users/${username}`);
   if(!response.ok){
-    throw new Error("User not found!");
+    if(response.status === 404){
+      throw new Error("User not found!");
+    }else if(response.status === 403){
+      throw new Error("Access Restricted");
+    }else if(response.status >= 500 && response.status < 600){
+      throw new Error("GitHub Server Error");
+    }else{
+      throw new Error("Something Went Wrong");
+    }
   }
   const user = await response.json();
   return user;
