@@ -126,9 +126,9 @@ export function renderProfile(user, profileCardSection){
   `;
 }
 
-export function renderRepositories(result, repoGridSection){
+export function renderRepositories(repositories, repoGridSection){
 
-  const repoHTML = result.repositories.map((repo) => {
+  const repoHTML = repositories.map((repo) => {
       return `
         <article class="repo-card">
           <div class="repo-card-top">
@@ -182,17 +182,13 @@ export function renderRepositories(result, repoGridSection){
       `;
   }).join("");
 
-  let paginationHTML = "";
-
-  if(result.hasNextPage || result.hasPreviousPage){
-    paginationHTML = `
-      <div class="pagination js-pagination">
-        <button type="button" class="js-prev-page">← Previous</button>
-        <span class="js-page-number">Page 1</span>
-        <button type="button" class="js-next-page">Next →</button>
-      </div>
-    `;
-  }
+  const paginationHTML = `
+    <div class="pagination js-pagination">
+      <button type="button" class="js-prev-page">← Previous</button>
+      <span class="js-page-number">Page 1</span>
+      <button type="button" class="js-next-page">Next →</button>
+    </div>
+  `;
 
   repoGridSection.innerHTML = repoHTML + paginationHTML;
 

@@ -1,3 +1,5 @@
+import { allRepositories } from '../../data/allRepositories.js'
+
 const BASE_URL = "https://api.github.com";
 
 export async function getUser(username){
@@ -32,3 +34,23 @@ export async function getRepositories(username, page, perPage){
     hasPreviousPage
   };
 }
+
+export async function getAllRepositories(username){
+  
+  allRepositories.length = 0;
+
+  let page = 1;
+  const perPage = 100;
+  let hasNextPage = true;
+
+  while(hasNextPage){
+    let response = await getRepositories(username, page, perPage);
+    allRepositories.push(...response.repositories);
+    hasNextPage = response.hasNextPage;
+    page++;
+  }
+  
+  return allRepositories;
+  
+}
+

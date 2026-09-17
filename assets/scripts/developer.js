@@ -1,5 +1,6 @@
-import { getUser, getRepositories } from "./github-api.js";
+import { getUser, getAllRepositories } from "./github-api.js";
 import { renderProfile, renderRepositories, showError } from "./render.js";
+import { allRepositories } from "../../data/allRepositories.js";
 
 const profileCardSection = document.querySelector(".js-profile-card");
 const repoGridSection = document.querySelector(".js-repo-grid");
@@ -16,9 +17,11 @@ export async function loadDeveloper(username){
   currentPage = 1;
 
   let result;
+  let paginatedRepositories;
 
   try{
-      result = await getRepositories(username, currentPage, reposPerPage);
+      result = await getAllRepositories(username);
+      paginatedRepositories = getPaginatedRepositories(currentPage);
   }catch(error){
     showError(
       "Repositories Unavailable",
@@ -29,7 +32,7 @@ export async function loadDeveloper(username){
     return user;
   } 
 
-  if(result.repositories.length === 0){
+  if(result.length === 0){
     repoGridSection.innerHTML = `
       <div class="state-card-empty">
         <div class="state-icon" aria-hidden="true">
@@ -45,70 +48,49 @@ export async function loadDeveloper(username){
       </div>
     `;
   }else{
-    renderRepositories(result, repoGridSection);
-    setUpPagination(result, username, reposPerPage, repoGridSection);
+    renderRepositories(paginatedRepositories, repoGridSection);
+    setUpPagination();
   }
 
   return user;
 
 }
 
-function setUpPagination(result, currentUsername, reposPerPage, repoGridSection){
-  if(result.hasNextPage || result.hasPreviousPage){
-    const prevPageButton = document.querySelector(".js-prev-page");
-    const nextPageButton = document.querySelector(".js-next-page");
-    const pageNumber = document.querySelector(".js-page-number");
+function setUpPagination() {
+  const prevPageButton = document.querySelector(".js-prev-page");
+  const nextPageButton = document.querySelector(".js-next-page");
+  const pageNumber = document.querySelector(".js-page-number");
 
-    prevPageButton.disabled = !result.hasPreviousPage;
-    nextPageButton.disabled = !result.hasNextPage;
-    pageNumber.textContent = `Page ${currentPage}`;
+  const totalPages = Math.ceil(allRepositories.length / reposPerPage);
 
-    nextPageButton.addEventListener('click', async () => {
-      const nextPage = currentPage + 1;
+  prevPageButton.disabled = currentPage === 1;
+  nextPageButton.disabled = currentPage === totalPages;
+  pageNumber.textContent = `Page ${currentPage} of ${totalPages}`;
 
-      try {
-        const result = await getRepositories(
-          currentUsername,
-          nextPage,
-          reposPerPage
-        );
+  nextPageButton.addEventListener("click", () => {
+    currentPage++;
 
-        currentPage = nextPage;
+    const paginatedRepositories = getPaginatedRepositories(currentPage);
 
-        renderRepositories(result, repoGridSection);
-        setUpPagination(result, currentUsername, reposPerPage, repoGridSection);
+    renderRepositories(paginatedRepositories, repoGridSection);
 
-      }catch(error) {
-        showError(
-          "Repositories Unavailable",
-          "We couldn't retrieve this developer's repositories. Please try again.",
-          repoGridSection
-        );
-      }
-    }); 
+    setUpPagination();
+  });
 
-    prevPageButton.addEventListener('click', async () => {
-      const previousPage = currentPage - 1;
+  prevPageButton.addEventListener("click", () => {
+    currentPage--;
 
-      try {
-        const result = await getRepositories(
-          currentUsername,
-          previousPage,
-          reposPerPage
-        );
+    const paginatedRepositories = getPaginatedRepositories(currentPage);
 
-        currentPage = previousPage;
+    renderRepositories(paginatedRepositories, repoGridSection);
 
-        renderRepositories(result, repoGridSection);
-        setUpPagination(result, currentUsername, reposPerPage, repoGridSection);
-
-      } catch(error) {
-        showError(
-          "Repositories Unavailable",
-          "We couldn't retrieve this developer's repositories. Please try again.",
-          repoGridSection
-        );
-      }
-    });
-  }
+    setUpPagination();
+  });
 }
+
+function getPaginatedRepositories(currentPage){
+  const startIndex = (currentPage - 1) * reposPerPage;
+  const endIndex = startIndex + reposPerPage;
+  const currentRepositories = allRepositories.slice(startIndex, endIndex);
+  return currentRepositories;
+} 
