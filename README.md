@@ -1,18 +1,16 @@
 <div align="center">
 
-  <img src="assets/logo.svg" alt="GitExplorer Logo" width="80" height="80" />
+<h1>GitExplorer</h1>
 
-GitExplorer
+<p>
+  Explore GitHub developers and their public repositories with vanilla JavaScript.
+</p>
 
-Explore GitHub developers and their repositories with vanilla JavaScript.
-
-Search for a GitHub developer, view their profile and public repositories, filter and sort repositories, and save favorite developers for quick access.
-
-  <p>
-    <a href="https://naman-gudhka.github.io/GitExplorer/">Live Demo</a>
-    ·
-    <a href="https://github.com/naman-gudhka/GitExplorer">Repository</a>
-  </p>
+<p>
+  <a href="https://naman-gudhka.github.io/GitExplorer/"><strong>Live Demo</strong></a>
+  &nbsp;•&nbsp;
+  <a href="https://github.com/naman-gudhka/GitExplorer"><strong>GitHub Repository</strong></a>
+</p>
 
 </div>
 
@@ -20,7 +18,7 @@ Overview
 
 GitExplorer is a GitHub developer discovery app built with HTML, CSS, and vanilla JavaScript.
 
-The app uses the GitHub REST API to retrieve developer profiles and their public repositories. Repository data is fetched and processed locally so users can search, filter, sort, and paginate through the results without making additional requests for each UI interaction.
+It uses the GitHub REST API to retrieve developer profiles and public repositories. Repository data is fetched and processed locally, allowing users to search, filter, sort, and paginate through the results without making additional API requests for each UI interaction.
 
 Features
 
@@ -42,7 +40,7 @@ Features
 
 💾 Local Storage — Persist favorites and theme preference across sessions.
 
-🌙 Dark / Light Theme — Switch themes with the selected preference saved locally.
+🌙 Dark / Light Theme — Switch between themes with the selected preference saved locally.
 
 ♿ Accessibility — Uses semantic HTML and ARIA attributes for interactive controls and states.
 
@@ -50,37 +48,71 @@ Features
 
 Tech Stack
 
+Technology
+
+Usage
+
 HTML5
+
+Semantic page structure
 
 CSS3
 
-JavaScript (ES Modules)
+Responsive UI and theming
+
+JavaScript
+
+Application logic and DOM interaction
 
 GitHub REST API
 
-Browser Local Storage
+Developer and repository data
+
+Local Storage
+
+Favorites and theme persistence
 
 Git & GitHub
+
+Version control and deployment
 
 No frontend framework or external UI library is used.
 
 How It Works
 
-The application separates API data fetching from repository UI processing:
+The application separates data fetching from UI processing:
 
-GitHub REST API
-      ↓
-Fetch developer profile
-      ↓
-Fetch all public repositories
-      ↓
-allRepositories[]
-      ↓
-Search / Language Filter / Sort
-      ↓
-Local Pagination
-      ↓
-Render Repository Cards
+┌──────────────────────┐
+│   GitHub REST API    │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Developer + Repos    │
+│       fetched        │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ allRepositories[]    │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Search by name       │
+│ Filter by language   │
+│ Sort repositories    │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│   Local Pagination   │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│   Render repo cards  │
+└──────────────────────┘
 
 Repository filtering, sorting, and pagination happen locally using the fetched repository array.
 
@@ -108,10 +140,13 @@ GitExplorer/
 │   │   ├── main.js
 │   │   ├── render.js
 │   │   └── utils.js
+│   │
 │   └── styles/
+│
 ├── data/
 │   ├── allRepositories.js
 │   └── favorites.js
+│
 ├── index.html
 └── README.md
 
@@ -167,7 +202,7 @@ Search for any GitHub username and explore their public profile and repositories
 
 Live Demo
 
-Open GitExplorer
+Open GitExplorer →
 
 What I Practiced
 
@@ -202,8 +237,6 @@ Error and empty-state handling
 Git and GitHub workflow
 
 Future Improvements
-
-Possible improvements for future iterations:
 
 Add repository topics and additional metadata.
 
