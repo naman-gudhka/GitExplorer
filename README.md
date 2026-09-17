@@ -2,8 +2,8 @@
 
 > Explore GitHub developers and their public repositories using vanilla JavaScript.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-2ea44f?style=flat-square)](https://naman-gudhka.github.io/GitExplorer/)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/naman-gudhka/GitExplorer)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-2ea44f?style=for-the-badge&logo=googlechrome&logoColor=white)](https://naman-gudhka.github.io/GitExplorer/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub_Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/naman-gudhka/GitExplorer)
 
 ---
 
