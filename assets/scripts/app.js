@@ -14,78 +14,7 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   try{
-    profileCardSection.innerHTML = `
-    <div>
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-header">
-          <div class="skeleton-avatar skeleton-shimmer"></div>
-          <div class="skeleton-meta">
-            <div class="skeleton-line title skeleton-shimmer"></div>
-            <div class="skeleton-line w-50 skeleton-shimmer"></div>
-            <div class="skeleton-line w-70 skeleton-shimmer"></div>
-          </div>
-        </div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-      </div>
-    </div>
-    `;
-
-    repoGridSection.innerHTML = `
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-    `;
+    showLoadingState();
     
     currentUsername = searchBar.value.trim();
     
@@ -95,59 +24,7 @@ form.addEventListener('submit', async (e) => {
 
   }catch(error){
 
-    if(error.message === "User not found!"){
-      showError(
-        "User Not Found",
-        "No GitHub user matching the username could be found. Please check the username and try again.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because the GitHub user could not be retrieved.",
-        repoGridSection
-      );
-
-    }else if(error.message === "Access Restricted"){
-      showError(
-        "Access Restricted",
-        "GitHub has temporarily restricted this request. You may have reached the API rate limit. Please try again later.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because the GitHub user request was restricted. Please try again later.",
-        repoGridSection
-      );
-
-    }else if(error.message === "GitHub Server Error"){
-      showError(
-        "GitHub Server Error",
-        "GitHub is currently experiencing a server-side problem. Please try again later.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because GitHub is currently experiencing a server-side problem.",
-        repoGridSection
-      );
-
-    }else{
-      showError(
-        "Something Went Wrong",
-        "We couldn't retrieve the GitHub user right now. Please try again.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because the GitHub user could not be retrieved.",
-        repoGridSection
-      );
-
-    }
+    handleDeveloperError(error);
 
   }
   
@@ -163,78 +40,7 @@ favoritesGridSection.addEventListener('click', async (e) => {
       return;
     }
 
-    profileCardSection.innerHTML = `
-    <div>
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-header">
-          <div class="skeleton-avatar skeleton-shimmer"></div>
-          <div class="skeleton-meta">
-            <div class="skeleton-line title skeleton-shimmer"></div>
-            <div class="skeleton-line w-50 skeleton-shimmer"></div>
-            <div class="skeleton-line w-70 skeleton-shimmer"></div>
-          </div>
-        </div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-      </div>
-    </div>
-    `;
-
-    repoGridSection.innerHTML = `
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-
-      <div class="skeleton-box" aria-hidden="true">
-        <div class="skeleton-line title skeleton-shimmer"></div>
-        <div class="skeleton-line w-90 skeleton-shimmer"></div>
-        <div class="skeleton-line w-70 skeleton-shimmer"></div>
-
-        <div class="skeleton-line w-30 skeleton-shimmer"></div>
-        <div class="skeleton-line w-50 skeleton-shimmer"></div>
-      </div>
-    `;
+    showLoadingState();
 
     const username = favoriteLink.dataset.login;
     currentUsername = username;
@@ -243,58 +49,7 @@ favoritesGridSection.addEventListener('click', async (e) => {
 
   }catch(error){
 
-    if(error.message === "User not found!"){
-      showError(
-        "User Not Found",
-        "No GitHub user matching the username could be found. Please check the username and try again.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because the GitHub user could not be retrieved.",
-        repoGridSection
-      );
-
-    }else if(error.message === "Access Restricted"){
-      showError(
-        "Access Restricted",
-        "GitHub has temporarily restricted this request. You may have reached the API rate limit. Please try again later.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because the GitHub user request was restricted. Please try again later.",
-        repoGridSection
-      );
-
-    }else if(error.message === "GitHub Server Error"){
-      showError(
-        "GitHub Server Error",
-        "GitHub is currently experiencing a server-side problem. Please try again later.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because GitHub is currently experiencing a server-side problem.",
-        repoGridSection
-      );
-
-    }else{
-      showError(
-        "Something Went Wrong",
-        "We couldn't retrieve the GitHub user right now. Please try again.",
-        profileCardSection
-      );
-
-      showError(
-        "Repositories Unavailable",
-        "We couldn't load the repositories because the GitHub user could not be retrieved.",
-        repoGridSection
-      );
-    }
+    handleDeveloperError(error);
 
   }
 
@@ -331,4 +86,134 @@ function setupFavoriteButton(user){
       renderFavorites(currentUsername);
     }
   });
+}
+
+function showLoadingState() {
+  profileCardSection.innerHTML = `
+    <div>
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-header">
+          <div class="skeleton-avatar skeleton-shimmer"></div>
+          <div class="skeleton-meta">
+            <div class="skeleton-line title skeleton-shimmer"></div>
+            <div class="skeleton-line w-50 skeleton-shimmer"></div>
+            <div class="skeleton-line w-70 skeleton-shimmer"></div>
+          </div>
+        </div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+      </div>
+    </div>
+    `;
+
+  repoGridSection.innerHTML = `
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-line title skeleton-shimmer"></div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-70 skeleton-shimmer"></div>
+
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+        <div class="skeleton-line w-50 skeleton-shimmer"></div>
+      </div>
+
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-line title skeleton-shimmer"></div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-70 skeleton-shimmer"></div>
+
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+        <div class="skeleton-line w-50 skeleton-shimmer"></div>
+      </div>
+
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-line title skeleton-shimmer"></div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-70 skeleton-shimmer"></div>
+
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+        <div class="skeleton-line w-50 skeleton-shimmer"></div>
+      </div>
+
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-line title skeleton-shimmer"></div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-70 skeleton-shimmer"></div>
+
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+        <div class="skeleton-line w-50 skeleton-shimmer"></div>
+      </div>
+
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-line title skeleton-shimmer"></div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-70 skeleton-shimmer"></div>
+
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+        <div class="skeleton-line w-50 skeleton-shimmer"></div>
+      </div>
+
+      <div class="skeleton-box" aria-hidden="true">
+        <div class="skeleton-line title skeleton-shimmer"></div>
+        <div class="skeleton-line w-90 skeleton-shimmer"></div>
+        <div class="skeleton-line w-70 skeleton-shimmer"></div>
+
+        <div class="skeleton-line w-30 skeleton-shimmer"></div>
+        <div class="skeleton-line w-50 skeleton-shimmer"></div>
+      </div>
+    `;
+}
+
+function handleDeveloperError(error) {
+  if (error.message === "User not found!") {
+    showError(
+      "User Not Found",
+      "No GitHub user matching the username could be found. Please check the username and try again.",
+      profileCardSection
+    );
+
+    showError(
+      "Repositories Unavailable",
+      "We couldn't load the repositories because the GitHub user could not be retrieved.",
+      repoGridSection
+    );
+
+  } else if (error.message === "Access Restricted") {
+    showError(
+      "Access Restricted",
+      "GitHub has temporarily restricted this request. You may have reached the API rate limit. Please try again later.",
+      profileCardSection
+    );
+
+    showError(
+      "Repositories Unavailable",
+      "We couldn't load the repositories because the GitHub user request was restricted. Please try again later.",
+      repoGridSection
+    );
+
+  } else if (error.message === "GitHub Server Error") {
+    showError(
+      "GitHub Server Error",
+      "GitHub is currently experiencing a server-side problem. Please try again later.",
+      profileCardSection
+    );
+
+    showError(
+      "Repositories Unavailable",
+      "We couldn't load the repositories because GitHub is currently experiencing a server-side problem.",
+      repoGridSection
+    );
+
+  } else {
+    showError(
+      "Something Went Wrong",
+      "We couldn't retrieve the GitHub user right now. Please try again.",
+      profileCardSection
+    );
+
+    showError(
+      "Repositories Unavailable",
+      "We couldn't load the repositories because the GitHub user could not be retrieved.",
+      repoGridSection
+    );
+  }
 }

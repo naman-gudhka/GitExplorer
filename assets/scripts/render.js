@@ -144,25 +144,25 @@ export function renderRepositories(repositories, repoGridSection){
             </div>
 
             <p class="repo-description">
-              ${repo.description}
+              ${repo.description || "No description provided."}
             </p>
           </div>
 
           <div class="repo-card-footer">
             <div class="repo-meta-group">
               <span class="repo-lang-badge">
-                <span class="lang-dot ts" aria-hidden="true"></span>
-                <span>${repo.language}</span>
+                <span class="lang-dot" aria-hidden="true"></span>
+                <span>${repo.language || "N/A"}</span>
               </span>
 
-              <span class="repo-stat-item" title="60,340 Stars">
+              <span class="repo-stat-item">
                 <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
                 ${formatNumber(repo.stargazers_count)}
               </span>
 
-              <span class="repo-stat-item" title="15,400 Forks">
+              <span class="repo-stat-item">
                 <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <circle cx="12" cy="18" r="3"></circle>
                   <circle cx="6" cy="6" r="3"></circle>
@@ -277,5 +277,29 @@ export function showError(title, message, section){
       </div>
     </div>
   </div>
+  `;
+}
+
+export function showNoMatchingRepositories(repoGridSection) {
+  repoGridSection.innerHTML = `
+    <div class="state-card-empty">
+      <div class="state-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10 3H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6"></path>
+          <path d="M16 3h5v5"></path>
+          <path d="M21 3l-8 8"></path>
+        </svg>
+      </div>
+
+      <h3 class="state-card-title">No Repositories Found</h3>
+
+      <p class="state-card-text">
+        No repositories match your current filters.
+      </p>
+
+      <button type="button" class="btn btn-clear-filters js-clear-filters">
+        Clear Filters
+      </button>
+    </div>
   `;
 }

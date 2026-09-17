@@ -26,12 +26,10 @@ export async function getRepositories(username, page, perPage){
   }
   const linkHeader = response.headers.get("Link");
   const hasNextPage = !!linkHeader && linkHeader.includes('rel="next"');
-  const hasPreviousPage = !!linkHeader && linkHeader.includes('rel="prev"');
   const repositories = await response.json();
   return {  
     repositories, 
-    hasNextPage, 
-    hasPreviousPage
+    hasNextPage
   };
 }
 
@@ -44,7 +42,7 @@ export async function getAllRepositories(username){
   let hasNextPage = true;
 
   while(hasNextPage){
-    let response = await getRepositories(username, page, perPage);
+    const response = await getRepositories(username, page, perPage);
     allRepositories.push(...response.repositories);
     hasNextPage = response.hasNextPage;
     page++;

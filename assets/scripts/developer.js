@@ -1,6 +1,6 @@
 import { getUser, getAllRepositories } from "./github-api.js";
-import { renderProfile, renderRepositories, showError } from "./render.js";
-import { allRepositories } from "../../data/allRepositories.js";
+import { renderProfile, renderRepositories, showError, showNoMatchingRepositories } from "./render.js";
+import { processRepositories, resetRepositoryControls, setupRepositoryControls, populateLanguageFilter } from "./controls.js";
 
 const profileCardSection = document.querySelector(".js-profile-card");
 const repoGridSection = document.querySelector(".js-repo-grid");
@@ -8,20 +8,17 @@ const repoGridSection = document.querySelector(".js-repo-grid");
 let currentPage = 1;
 const reposPerPage = 6;
 
+let currentRepositories = [];
+
 export async function loadDeveloper(username){
 
   const user = await getUser(username);
 
   renderProfile(user, profileCardSection);
-  
-  currentPage = 1;
-
-  let result;
-  let paginatedRepositories;
 
   try{
-      result = await getAllRepositories(username);
-      paginatedRepositories = getPaginatedRepositories(currentPage);
+      currentRepositories = await getAllRepositories(username);
+      populateLanguageFilter(currentRepositories);
   }catch(error){
     showError(
       "Repositories Unavailable",
@@ -32,36 +29,18 @@ export async function loadDeveloper(username){
     return user;
   } 
 
-  if(result.length === 0){
-    repoGridSection.innerHTML = `
-      <div class="state-card-empty">
-        <div class="state-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-          </svg>
-        </div>
-        <h3 class="state-card-title">No Public Repositories</h3>
-        <p class="state-card-text">
-          This developer doesn't have any public repositories.
-        </p>
-      </div>
-    `;
-  }else{
-    renderRepositories(paginatedRepositories, repoGridSection);
-    setUpPagination();
-  }
+  updateRepositoryView();
 
   return user;
 
 }
 
-function setUpPagination() {
+function setUpPagination(processedRepositories) {
   const prevPageButton = document.querySelector(".js-prev-page");
   const nextPageButton = document.querySelector(".js-next-page");
   const pageNumber = document.querySelector(".js-page-number");
 
-  const totalPages = Math.ceil(allRepositories.length / reposPerPage);
+  const totalPages = Math.ceil(processedRepositories.length / reposPerPage);
 
   prevPageButton.disabled = currentPage === 1;
   nextPageButton.disabled = currentPage === totalPages;
@@ -70,27 +49,75 @@ function setUpPagination() {
   nextPageButton.addEventListener("click", () => {
     currentPage++;
 
-    const paginatedRepositories = getPaginatedRepositories(currentPage);
+    const paginatedRepositories = getPaginatedRepositories(processedRepositories, currentPage);
 
     renderRepositories(paginatedRepositories, repoGridSection);
 
-    setUpPagination();
+    setUpPagination(processedRepositories);
   });
 
   prevPageButton.addEventListener("click", () => {
     currentPage--;
 
-    const paginatedRepositories = getPaginatedRepositories(currentPage);
+    const paginatedRepositories = getPaginatedRepositories(processedRepositories, currentPage);
 
     renderRepositories(paginatedRepositories, repoGridSection);
 
-    setUpPagination();
+    setUpPagination(processedRepositories);
   });
 }
 
-function getPaginatedRepositories(currentPage){
+function getPaginatedRepositories(processedRepositories, currentPage){
   const startIndex = (currentPage - 1) * reposPerPage;
   const endIndex = startIndex + reposPerPage;
-  const currentRepositories = allRepositories.slice(startIndex, endIndex);
+  const currentRepositories = processedRepositories.slice(startIndex, endIndex);
   return currentRepositories;
 } 
+
+function updateRepositoryView(){
+  currentPage = 1;
+
+  if (currentRepositories.length === 0) {
+    repoGridSection.innerHTML = `
+      <div class="state-card-empty">
+        <div class="state-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+        </div>
+
+        <h3 class="state-card-title">No Public Repositories</h3>
+
+        <p class="state-card-text">
+          This developer doesn't have any public repositories.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+  const processedRepositories = processRepositories(currentRepositories);
+  
+  if (processedRepositories.length === 0) {
+    
+    showNoMatchingRepositories(repoGridSection);
+    const resetButton = document.querySelector(".js-clear-filters");
+    
+    resetButton.addEventListener('click', () => {
+      resetRepositoryControls();
+      updateRepositoryView();
+    });
+    
+    return;
+  
+  }
+  const paginatedRepositories = getPaginatedRepositories(processedRepositories, currentPage);
+  
+  renderRepositories(paginatedRepositories, repoGridSection);
+  
+  setUpPagination(processedRepositories);
+}
+
+setupRepositoryControls(updateRepositoryView);
