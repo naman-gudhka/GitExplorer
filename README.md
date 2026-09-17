@@ -1,134 +1,56 @@
-<div align="center">
+GitExplorer
 
-<h1>GitExplorer</h1>
+Explore GitHub developers and their public repositories with vanilla JavaScript.
 
-<p>
-  Explore GitHub developers and their public repositories with vanilla JavaScript.
-</p>
+Live Demo · GitHub Repository
 
-<p>
-  <a href="https://naman-gudhka.github.io/GitExplorer/"><strong>Live Demo</strong></a>
-  &nbsp;•&nbsp;
-  <a href="https://github.com/naman-gudhka/GitExplorer"><strong>GitHub Repository</strong></a>
-</p>
+✨ Features
 
-</div>
+🔎 Search GitHub developers by username
 
-Overview
+👤 View developer profiles and public repositories
 
-GitExplorer is a GitHub developer discovery app built with HTML, CSS, and vanilla JavaScript.
+🔤 Search repositories by name
 
-It uses the GitHub REST API to retrieve developer profiles and public repositories. Repository data is fetched and processed locally, allowing users to search, filter, sort, and paginate through the results without making additional API requests for each UI interaction.
+🏷️ Filter repositories by language
 
-Features
+↕️ Sort by stars, name, or recently updated
 
-🔎 Developer Search — Search for a GitHub developer by username.
+📄 Browse repositories with local pagination
 
-👤 Developer Profile — View profile information and GitHub details.
+⭐ Save favorite developers with localStorage
 
-📦 Repository Explorer — View all available public repositories.
+🌙 Switch between dark and light themes
 
-🔤 Repository Search — Search repositories by name.
+⚠️ Loading, error, and empty states
 
-🏷️ Language Filter — Dynamically generated from the developer's repositories.
+🛠️ Tech Stack
 
-↕️ Repository Sorting — Sort by stars, name, or recently updated.
+HTML5 · CSS3 · Vanilla JavaScript · GitHub REST API · Local Storage
 
-📄 Local Pagination — Browse repositories six at a time.
-
-⭐ Favorites — Save developers and quickly load them later.
-
-💾 Local Storage — Persist favorites and theme preference across sessions.
-
-🌙 Dark / Light Theme — Switch between themes with the selected preference saved locally.
-
-♿ Accessibility — Uses semantic HTML and ARIA attributes for interactive controls and states.
-
-⚠️ Error & Empty States — Handles invalid users, restricted access, unavailable repositories, empty repositories, and unmatched filters.
-
-Tech Stack
-
-Technology
-
-Usage
-
-HTML5
-
-Semantic page structure
-
-CSS3
-
-Responsive UI and theming
-
-JavaScript
-
-Application logic and DOM interaction
+🔄 How It Works
 
 GitHub REST API
+       │
+       ▼
+Developer + Repositories
+       │
+       ▼
+Local Repository Data
+       │
+       ├── Search
+       ├── Language Filter
+       └── Sort
+       │
+       ▼
+Local Pagination
+       │
+       ▼
+Repository Cards
 
-Developer and repository data
+Filtering, sorting, and pagination are handled locally after the repository data is fetched.
 
-Local Storage
-
-Favorites and theme persistence
-
-Git & GitHub
-
-Version control and deployment
-
-No frontend framework or external UI library is used.
-
-How It Works
-
-The application separates data fetching from UI processing:
-
-┌──────────────────────┐
-│   GitHub REST API    │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ Developer + Repos    │
-│       fetched        │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ allRepositories[]    │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ Search by name       │
-│ Filter by language   │
-│ Sort repositories    │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   Local Pagination   │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   Render repo cards  │
-└──────────────────────┘
-
-Repository filtering, sorting, and pagination happen locally using the fetched repository array.
-
-API
-
-GitExplorer uses the GitHub REST API.
-
-The application uses GitHub endpoints to:
-
-Fetch a developer profile.
-
-Fetch the developer's public repositories.
-
-Handle API pagination while retrieving the complete repository list.
-
-Project Structure
+📁 Project Structure
 
 GitExplorer/
 ├── assets/
@@ -140,111 +62,52 @@ GitExplorer/
 │   │   ├── main.js
 │   │   ├── render.js
 │   │   └── utils.js
-│   │
 │   └── styles/
-│
 ├── data/
 │   ├── allRepositories.js
 │   └── favorites.js
-│
 ├── index.html
 └── README.md
 
-JavaScript Responsibilities
-
-File
-
-Responsibility
-
-app.js
-
-Application events, developer search, favorites interaction, loading and error handling
-
-controls.js
-
-Repository search, language filtering, sorting, and repository controls
-
-developer.js
-
-Developer loading and repository view updates
-
-github-api.js
-
-GitHub API requests and repository fetching
-
-main.js
-
-Theme initialization and theme switching
-
-render.js
-
-Rendering profiles, repositories, favorites, and UI states
-
-utils.js
-
-Local storage, number formatting, and date formatting
-
-Getting Started
+🚀 Getting Started
 
 1. Clone the repository
 
 git clone https://github.com/naman-gudhka/GitExplorer.git
 
-2. Open the project
+2. Run locally
 
-Open the project folder in your code editor and run it through a local development server.
+Open the project with a local development server, such as VS Code Live Server.
 
-For example, you can use the Live Server extension in VS Code.
+3. Explore
 
-3. Start exploring
+Search for any GitHub username and explore their profile and repositories.
 
-Search for any GitHub username and explore their public profile and repositories.
-
-Live Demo
-
-Open GitExplorer →
-
-What I Practiced
-
-This project helped me practice:
+📚 What I Practiced
 
 JavaScript ES modules
 
-async / await
+Promises and async / await
 
-Promises
-
-fetch()
-
-REST APIs
-
-HTTP response handling
+fetch() and REST APIs
 
 DOM manipulation
 
-Array methods such as filter(), sort(), slice(), and find()
+Array methods and client-side data processing
 
 Local storage
 
-Event handling
-
-Client-side filtering and pagination
-
-Dynamic UI rendering
-
-Error and empty-state handling
-
 Git and GitHub workflow
 
-Future Improvements
+🔮 Future Improvements
 
-Add repository topics and additional metadata.
+Repository topics and additional metadata
 
-Add more repository sorting and filtering options.
+More filtering options
 
-Improve API rate-limit handling.
+API rate-limit handling
 
-Add automated testing.
+Automated testing
 
 <div align="center">
 
